@@ -41,16 +41,17 @@ export default function Home() {
   return (
     <div className='flex flex-col items-center justify-center w-full h-full'>
       <h1 className='text-4xl font-bold'>Shooping Card</h1>
-      <main className='flex w-full justify-center  gap-5'>
-        <section className='flex flex-col items-center justify-center w-full h-full bg-secondary rounded-lg ml-10 py-10'>
+      <main className='flex w-full justify-center  gap-5 flex-col md:flex-row'>
+        <section className='flex flex-col items-center justify-center w-full h-full bg-secondary rounded-lg  py-10'>
           <h1 className='text-2xl font-bold'>Shopping list</h1>
-          <ul className='flex flex-col gap-5 w-[80%]'>
+          <ul className='flex flex-col gap-1 w-[80%]'>
             {PRODUCTS.map((product) => (
               <div
                 key={product.id}
-                className='flex flex-col gap-2 items-center justify-center'
+                className='flex flex-col  items-center justify-center bg-slate-100 py-5'
               >
                 <li>{product.name}</li>
+                <li>$ {product.price}</li>
                 <button
                   className='bg-blue-300 text-black px-4 py-2 rounded-lg'
                   onClick={() => handleAddtoCard(product)}
@@ -61,19 +62,19 @@ export default function Home() {
             ))}
           </ul>
         </section>
-        <section className='flex flex-col items-center justify-center w-full h-full bg-secondary rounded-lg mr-10 py-10'>
+        <section className='flex flex-col items-center justify-center w-full h-full bg-secondary rounded-lg py-2 md:py-10'>
           <h1 className='text-2xl font-bold'>Shopping cart</h1>
-          <ul className='flex flex-col gap-5 w-[80%]'>
+          <ul className='flex flex-col gap-1 w-[80%]'>
             {cart.map(
               (product) =>
                 cart.includes(product) && (
                   <div
                     key={product.id}
-                    className='flex flex-col gap-2 items-center justify-center'
+                    className='flex flex-col items-center justify-center bg-slate-100 py-4'
                   >
-                    <li>{product.quantity}</li>
-                    <li>{product.name}</li>
-                    <li>{product.price}</li>
+                    <li>Quantity: {product.quantity}</li>
+                    <li>Product: {product.name}</li>
+                    <li>$ {product.price * product.quantity}</li>
                     <button
                       className='bg-red-300 text-black px-4 py-2 rounded-lg'
                       onClick={() => setCart(cart.filter((p) => p !== product))}
